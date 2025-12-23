@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+# Load environment variables
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,12 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 # -----------------------
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'unsafe-secret-key')
+
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
+
+# Hosting safe
+ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = [
     'https://*.onrender.com',
 ]
-
 
 # -----------------------
 # Installed apps
@@ -33,7 +37,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 
     # Your app
-    'students',   # change if your app name is different
+    'students',
 ]
 
 # -----------------------
@@ -51,7 +55,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mysite.urls'   # change if project name is different
+# -----------------------
+# URLs & WSGI
+# -----------------------
+ROOT_URLCONF = 'mysite.urls'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # -----------------------
 # Templates
@@ -72,10 +80,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
-
 # -----------------------
-# ✅ Supabase PostgreSQL DB
+# 🗄️ Supabase PostgreSQL
 # -----------------------
 DATABASES = {
     'default': {
@@ -98,16 +104,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# -----------------------
+# Internationalization
+# -----------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
 # -----------------------
-# Static files
+# Static files (WhiteNoise)
 # -----------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # -----------------------
@@ -122,5 +132,7 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# -----------------------
+# Default primary key
 # -----------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
