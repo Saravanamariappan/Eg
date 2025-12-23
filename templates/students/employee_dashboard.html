@@ -5,40 +5,49 @@
   <title>Employee Dashboard</title>
 </head>
 <body>
-  <h2>Welcome, {{ request.user.username }}</h2>
-  <a href="{% url 'employee_logout' %}">Logout</a>
 
-  <h3>Uploaded Student Files</h3>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>ID</th>
-      <th>Student Name</th>
-      <th>Uploaded File Name</th>
-      <th>View</th>
-    </tr>
+<h2>Welcome, {{ request.user.username }}</h2>
 
-    {% for s in uploads %}
-    <tr>
-      <td>{{ s.id }}</td>
-      <td>{{ s.name }}</td>
-      <td>
-        {% if s.ppt_file %}
-          {{ s.ppt_file.name }}
-        {% else %}
-          No file
-        {% endif %}
-      </td>
-      <td>
-        {% if s.ppt_file %}
-          <a href="{{ s.ppt_file.url }}" target="_blank">View</a>
-        {% else %}
-          -
-        {% endif %}
-      </td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="4">No uploads yet</td></tr>
-    {% endfor %}
-  </table>
+<p>
+  <a href="{% url 'employee_logout' %}">Logout</a> |
+  <a href="{% url 'home' %}">Home</a>
+</p>
+
+<h3>Uploaded Student Files</h3>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>ID</th>
+    <th>Student Name</th>
+    <th>Uploaded File Name</th>
+    <th>View</th>
+  </tr>
+
+  {% for s in uploads %}
+  <tr>
+    <td>{{ s.id }}</td>
+    <td>{{ s.name }}</td>
+    <td>
+      {% if s.ppt_file %}
+        {{ s.ppt_file.name }}
+      {% else %}
+        No file
+      {% endif %}
+    </td>
+    <td>
+      {% if s.ppt_file %}
+        <a href="{{ s.ppt_file.url }}" target="_blank">View</a>
+      {% else %}
+        -
+      {% endif %}
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="4">No uploads yet</td>
+  </tr>
+  {% endfor %}
+</table>
+
 </body>
 </html>

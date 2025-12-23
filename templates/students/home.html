@@ -5,34 +5,41 @@
   <title>Students - List</title>
 </head>
 <body>
-  <h1>Students (Recent)</h1>
 
-  <p><a href="{% url 'upload_student' %}">Upload new student PPT</a></p>
+<h1>Students (Recent)</h1>
 
-  <table border="1" cellpadding="6">
-    <tr>
-      <th>Name</th>
-      <th>Roll No</th>
-      <th>PPT File</th>
-      <th>Uploaded At</th>
-    </tr>
+<p>
+  <a href="{% url 'upload_student' %}">Upload new student PPT</a> |
+  <a href="{% url 'employee_login' %}">Employee Login</a>
+</p>
 
-    {% for s in students %}
-    <tr>
-      <td>{{ s.name }}</td>
-      <td>{{ s.roll_no }}</td>
-      <td>
-        {% if s.ppt_file %}
-          <a href="{{ s.ppt_file.url }}" target="_blank">View</a>
-        {% else %}
-          No File
-        {% endif %}
-      </td>
-      <td>{{ s.created_at }}</td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="4">No students yet</td></tr>
-    {% endfor %}
-  </table>
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Name</th>
+    <th>Roll No</th>
+    <th>PPT File</th>
+    <th>Uploaded At</th>
+  </tr>
+
+  {% for s in students %}
+  <tr>
+    <td>{{ s.name }}</td>
+    <td>{{ s.roll_no }}</td>
+    <td>
+      {% if s.ppt_file %}
+        <a href="{{ s.ppt_file.url }}" target="_blank">View</a>
+      {% else %}
+        No File
+      {% endif %}
+    </td>
+    <td>{{ s.created_at }}</td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="4">No students yet</td>
+  </tr>
+  {% endfor %}
+</table>
+
 </body>
 </html>
