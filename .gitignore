@@ -1,0 +1,22 @@
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Django
+db.sqlite3
+staticfiles/
+media/
+
+# OS files
+.DS_Store
+Thumbs.db
