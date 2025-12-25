@@ -126,6 +126,9 @@ STATICFILES_STORAGE = (
 # --------------------------------------------------
 # CLOUDINARY (MEDIA FILES)
 # --------------------------------------------------
+# --------------------------------------------------
+# CLOUDINARY (MEDIA FILES)
+# --------------------------------------------------
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
     "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
@@ -133,7 +136,7 @@ CLOUDINARY_STORAGE = {
     "SECURE": True,
 }
 
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.RawMediaCloudinaryStorage"
 
 
 # --------------------------------------------------
