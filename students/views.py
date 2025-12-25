@@ -10,7 +10,7 @@ from .models import Student
 # Home – Student List
 # =========================
 def home(request):
-    students = Student.objects.all()
+    students = Student.objects.all().order_by('-created_at')
     return render(request, "home.html", {"students": students})
 
 
@@ -19,25 +19,25 @@ def home(request):
 # =========================
 def upload_student(request):
     if request.method == "POST":
-        name = request.POST.get('name')
-        roll_no = request.POST.get('roll_no')
-        ppt_file = request.FILES.get('ppt_file')
+        name = request.POST.get("name")
+        roll_no = request.POST.get("roll_no")
+        ppt_file = request.FILES.get("ppt_file")
 
         if not ppt_file:
             messages.error(request, "Please upload a PPT or PDF file")
-            return redirect('upload_student')
+            return redirect("upload_student")
 
         student = Student.objects.create(
             name=name,
             roll_no=roll_no,
-            ppt=ppt_file   # 🔥 FIXED (ppt_file ❌ → ppt ✅)
+            ppt_file=ppt_file
         )
 
-        return render(request, 'students/upload_success.html', {
-            'student': student
+        return render(request, "students/upload_success.html", {
+            "student": student
         })
 
-    return render(request, 'students/upload_form.html')
+    return render(request, "students/upload_form.html")
 
 
 # =========================
@@ -45,28 +45,28 @@ def upload_student(request):
 # =========================
 def employee_login(request):
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get("username")
+        password = request.POST.get("password")
 
         user = authenticate(request, username=username, password=password)
 
-        if user is not None:
+        if user:
             login(request, user)
-            return redirect('employee_dashboard')
+            return redirect("employee_dashboard")
         else:
             messages.error(request, "Invalid username or password")
 
-    return render(request, 'students/employee_login.html')
+    return render(request, "students/employee_login.html")
 
 
 # =========================
 # Employee Dashboard
 # =========================
-@login_required(login_url='employee_login')
+@login_required(login_url="employee_login")
 def employee_dashboard(request):
-    uploads = Student.objects.all().order_by('-created_at')
-    return render(request, 'students/employee_dashboard.html', {
-        'uploads': uploads
+    uploads = Student.objects.all().order_by("-created_at")
+    return render(request, "students/employee_dashboard.html", {
+        "uploads": uploads
     })
 
 
@@ -75,4 +75,5 @@ def employee_dashboard(request):
 # =========================
 def employee_logout(request):
     logout(request)
-    return redirect('employee_login')
+    return redirect("employee_login")
+    

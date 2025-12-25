@@ -26,8 +26,8 @@
     <td>{{ s.name }}</td>
     <td>{{ s.roll_no }}</td>
     <td>
-      {% if s.ppt %}
-        <a href="{{ s.ppt.url }}" target="_blank">View</a>
+      {% if s.ppt_file %}
+        <a href="{{ s.ppt_file.url }}" target="_blank">View</a>
       {% else %}
         No File
       {% endif %}
