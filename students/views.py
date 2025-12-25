@@ -10,10 +10,8 @@ from .models import Student
 # Home – Student List
 # =========================
 def home(request):
-    students = Student.objects.all().order_by('-created_at')
-    return render(request, 'students/home.html', {
-        'students': students
-    })
+    students = Student.objects.all()
+    return render(request, "home.html", {"students": students})
 
 
 # =========================
@@ -25,10 +23,14 @@ def upload_student(request):
         roll_no = request.POST.get('roll_no')
         ppt_file = request.FILES.get('ppt_file')
 
+        if not ppt_file:
+            messages.error(request, "Please upload a PPT or PDF file")
+            return redirect('upload_student')
+
         student = Student.objects.create(
             name=name,
             roll_no=roll_no,
-            ppt_file=ppt_file
+            ppt=ppt_file   # 🔥 FIXED (ppt_file ❌ → ppt ✅)
         )
 
         return render(request, 'students/upload_success.html', {

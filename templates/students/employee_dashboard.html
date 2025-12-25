@@ -28,15 +28,15 @@
     <td>{{ s.id }}</td>
     <td>{{ s.name }}</td>
     <td>
-      {% if s.ppt_file %}
-        {{ s.ppt_file.name }}
+      {% if s.ppt %}
+        {{ s.ppt.name }}
       {% else %}
         No file
       {% endif %}
     </td>
     <td>
-      {% if s.ppt_file %}
-        <a href="{{ s.ppt_file.url }}" target="_blank">View</a>
+      {% if s.ppt %}
+        <a href="{{ s.ppt.url }}" target="_blank">View</a>
       {% else %}
         -
       {% endif %}
