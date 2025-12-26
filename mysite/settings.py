@@ -13,11 +13,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-change-this")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    ".onrender.com",
-]
+ALLOWED_HOSTS = ['eg-dmxr.onrender.com', '.onrender.com']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
@@ -34,11 +30,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # Cloudinary
+    # 👇 MUST COME FIRST
     "cloudinary",
     "cloudinary_storage",
 
-    # App
     "students",
 ]
 
